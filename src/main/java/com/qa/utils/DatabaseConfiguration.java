@@ -13,4 +13,6 @@ public class DatabaseConfiguration {
 	// mysql url
 		
 		public static final String URL = "jdbc:mysql://localhost:3306/jdbctutorial?db_name&serverTimezone=UTC";
+		
+
 }
