@@ -10,58 +10,36 @@ public class Runner {
 	public static void main(String[] args) throws SQLException {
 
 		DatabaseConnector db = new DatabaseConnector();
-		CRUDer CRUD = new CRUDer();
-		
 		String action = "";
 		
 		try {	
 			do {
-				action = getAction();
+				action = CRUDer.getCRUD();
 				switch (action) {
 				case "C":
-					CRUD.create();
+					CRUDer.create();
 					break;
 				case "R":
-					db.readAll();
+					CRUDer.read();
 					break;
 				case "U":
-					CRUD.update();
+					CRUDer.update();
 					break;
-				
 				case "D":
-					System.out.println("Delete record with id");
-					int id = scan.nextInt();	
-					db.deleteRecord(id);
+					CRUDer.delete();
 					break;
 				case "E":
 					break;
 				default:
 					System.out.println("No Match");
-		}
+				}
 			}
 			while (!action.equals("E"));
-			System.out.println("bye");
+			System.out.println("Exiting");
 		}
 		finally {
 			scan.close();
 			db.close();
 		}
-		
-		//db.createRecord("Nick" , "Johnson");
-		//db.readAll();
-		//db.updateSurname("Nick", "Johnson", "Cage");
-		//db.readAll();
-		//db.deleteRecord("Nick","Cage");
-		//db.readAll();
-
-		
 	}
-	
-	private static String getAction() {
-				System.out.println("Ender C/R/U/D	(E)");
-		return scan.nextLine();
-		
-	}
-
-
 }

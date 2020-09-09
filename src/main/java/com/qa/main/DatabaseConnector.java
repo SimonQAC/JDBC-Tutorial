@@ -44,18 +44,18 @@ public class DatabaseConnector {
 	
 	public void readAll() throws SQLException{
 		String query = "SELECT * FROM first";
-		System.out.println("---------------------------");
-		System.out.println("| Forename | Surname | ID |");
-		System.out.println("---------------------------");
+		System.out.println("---------------------------------");
+		System.out.println("| Forename | Surname | Age | ID |");
+		System.out.println("---------------------------------");
 		this.statement = connection.createStatement();
 		ResultSet results = this.statement.executeQuery(query);
 		
 			while (results.next()) {
 				//System.out.println(String.format("%s %s", results.getString("forename"), results.getString("surname")));
-				String text = results.getString("forename") + " " + results.getString("Surname") + " " + results.getInt("id");
+				String text = results.getString("forename") + " " + results.getString("surname") + "   |   " + results.getInt("age") + "   |   " + results.getInt("id");
 				System.out.println(text);
 		}
-			System.out.println("---------------------------");
+			System.out.println("---------------------------------");
 	}
 	
 	public void updateSurname(int id, String newsurname) throws SQLException{
@@ -64,6 +64,22 @@ public class DatabaseConnector {
 		pS.setInt(2, id);
 		pS.setString(1, newsurname);
 		pS.execute();		
+	}
+	
+	public void updateForename(int id2, String newforename) throws SQLException{
+		String query = "UPDATE first SET forename = ? WHERE id = ? ";
+		PreparedStatement pS = connection.prepareStatement(query);
+		pS.setInt(2, id2);
+		pS.setString(1, newforename);
+		pS.execute();	
+	}
+	
+	public void updateAge(int id3, String newage) throws SQLException{
+		String query = "UPDATE first SET age = ? WHERE id = ? ";
+		PreparedStatement pS = connection.prepareStatement(query);
+		pS.setInt(2, id3);
+		pS.setString(1, newage);
+		pS.execute();	
 	}
 	
 	public void deleteRecord(int id) throws SQLException{
